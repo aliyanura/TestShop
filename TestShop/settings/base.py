@@ -141,6 +141,17 @@ SIMPLE_JWT = {
     "JTI_CLAIM": "jti",
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+
 from .thems import *
 
 if not PRODUCTION:
