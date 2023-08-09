@@ -39,7 +39,8 @@ class LoginAPIView(ModelViewSet):
         return Response(data={
             'message': 'You have successfully logged in',
             'data': {
-                'token': str(token),
+                "refresh": str(token),
+                "access": str(token.access_token),
                 'token_type': 'Token',
             },
             'status': "OK"

@@ -5,6 +5,9 @@ from src.common.models import BaseModel
 class Category(BaseModel):
     name = models.CharField(max_length=100, verbose_name='Наименование')
 
+    def __str__(self) -> str:
+        return self.name
+
     class Meta:
         db_table = "categoryes"
         verbose_name = "Категория"
@@ -15,6 +18,9 @@ class Category(BaseModel):
 class Tag(BaseModel):
     name = models.CharField(max_length=100, verbose_name='Наименование')
 
+    def __str__(self) -> str:
+        return self.name
+
     class Meta:
         db_table = "tags"
         verbose_name = "Тег"
@@ -24,13 +30,16 @@ class Tag(BaseModel):
 
 class Product(BaseModel):
     name = models.CharField(max_length=100, verbose_name='Наименование')
-    description = models.TextField()
-    price = models.FloatField()
+    description = models.TextField(verbose_name='Описание')
+    price = models.FloatField(verbose_name='Цена')
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name='products',
                                  verbose_name='Категория')
     tags = models.ManyToManyField(Tag, related_name='products',
-                                 verbose_name='Теги')
+                                  verbose_name='Теги', blank=True)
+    
+    def __str__(self) -> str:
+        return self.name
 
     class Meta:
         db_table = "products"
