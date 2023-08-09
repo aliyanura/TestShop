@@ -16,3 +16,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ('id', 'name', 'description', 'category_name',
                   'price', 'created_at', 'tags')
+
+
+class ProductsExportSerializer(serializers.Serializer):
+    file = serializers.URLField(required=True)
