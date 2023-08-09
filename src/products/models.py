@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.db import models
 from src.common.models import BaseModel
 
@@ -40,6 +41,12 @@ class Product(BaseModel):
     
     def __str__(self) -> str:
         return self.name
+    
+    def save(self, force_insert, force_update, using, update_fields) -> None:
+        super().save(force_insert, force_update, using, update_fields)
+        cache.clear()
+        return None
+        
 
     class Meta:
         db_table = "products"
